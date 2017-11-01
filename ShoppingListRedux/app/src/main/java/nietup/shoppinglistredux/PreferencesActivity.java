@@ -1,6 +1,8 @@
 package nietup.shoppinglistredux;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,13 +16,23 @@ public class PreferencesActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        settings = getSharedPreferences("my_pref", 0);
+        editor = settings.edit();
+        updateActivityTheme();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
 
-        settings = getPreferences(0);
-        editor = settings.edit();
-
         setDarkModeSwitchPosition();
+    }
+
+    private void updateActivityTheme() {
+        if (settings.getBoolean("dark_mode", false)) {
+            setTheme(R.style.DarkAppTheme);
+        }
+        else {
+            setTheme(R.style.AppTheme);
+        }
     }
 
     private void setDarkModeSwitchPosition() {
@@ -40,10 +52,16 @@ public class PreferencesActivity extends Activity {
         if (darkMode) {
             editor.putBoolean("dark_mode", false);
             editor.commit();
+            setTheme(R.style.AppTheme);
         }
         else {
             editor.putBoolean("dark_mode", true);
             editor.commit();
+            setTheme(R.style.DarkAppTheme);
         }
+    }
+
+    public void openMainMenu(View v) {
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

@@ -5,4 +5,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="DarkAppTheme" parent="AppTheme" >
+        <item name="android:colorBackground">@android:color/background_dark</item>
+        <item name="android:colorForeground">@android:color/background_light</item>
+        <item name="android:colorPrimaryDark">@android:color/background_light</item>
+        <item name="android:textColorPrimary">@android:color/background_light</item>
+    </style>
+
 </resources>
