@@ -1,13 +1,10 @@
 package nietup.shoppinglistredux;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 
-public class MainActivity extends Activity {
+public class ListActivity extends Activity {
 
     private SharedPreferences settings;
 
@@ -17,7 +14,7 @@ public class MainActivity extends Activity {
         updateActivityTheme();
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list);
     }
 
     private void updateActivityTheme() {
@@ -27,13 +24,5 @@ public class MainActivity extends Activity {
         else {
             setTheme(R.style.AppTheme);
         }
-    }
-
-    public void openPreferences(View v) {
-        startActivity(new Intent(this, PreferencesActivity.class));
-    }
-
-    public void openList(View v) {
-        startActivity(new Intent(this, ListActivity.class));
     }
 }
