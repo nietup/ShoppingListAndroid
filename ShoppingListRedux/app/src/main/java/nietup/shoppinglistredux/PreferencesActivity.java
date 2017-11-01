@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,14 +17,15 @@ public class PreferencesActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         settings = getSharedPreferences("my_pref", 0);
         editor = settings.edit();
         updateActivityTheme();
 
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
 
-        setDarkModeSwitchPosition();
+        setupDarkModeSwitch();
     }
 
     private void updateActivityTheme() {
@@ -35,11 +37,12 @@ public class PreferencesActivity extends Activity {
         }
     }
 
-    private void setDarkModeSwitchPosition() {
+    private void setupDarkModeSwitch() {
         Switch sw = (Switch) findViewById(R.id.dark_mode_switch);
 
         if (settings.getBoolean("dark_mode", false)) {
             sw.setChecked(true);
+            sw.setTextColor(Color.WHITE);
         }
         else {
             sw.setChecked(false);
@@ -52,12 +55,10 @@ public class PreferencesActivity extends Activity {
         if (darkMode) {
             editor.putBoolean("dark_mode", false);
             editor.commit();
-            setTheme(R.style.AppTheme);
         }
         else {
             editor.putBoolean("dark_mode", true);
             editor.commit();
-            setTheme(R.style.DarkAppTheme);
         }
     }
 
