@@ -4,4 +4,6 @@
     <string name="settings_button_text">Settings</string>
     <string name="back_button_text">Back</string>
     <string name="open_list_button_text">Show list</string>
+    <string name="populate_base_text">Populate Database</string>
+    <string name="drop_base">Drop Data</string>
 </resources>

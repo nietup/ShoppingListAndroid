@@ -1,4 +1,4 @@
-package nietup.sldbproject;
+package nietup.shoppinglistredux;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 /**
- * Created by nietup on 11/2/17.
+ * Created by nietup on 11/1/17.
  */
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -92,5 +92,11 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         return array_list;
+    }
+
+    public void deleteAllItems() {
+        SQLiteDatabase db = getWritableDatabase();
+
+        int x = db.delete(TOBUY_TABLE_NAME, "", null);
     }
 }
