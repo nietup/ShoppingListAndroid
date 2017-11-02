@@ -86,12 +86,9 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor res =  db.rawQuery("select * from " + TOBUY_TABLE_NAME, null);
-//        res.moveToFirst();
 
-//        while(!res.isAfterLast()) {
         while (res.moveToNext()) {
             array_list.add(res.getString(res.getColumnIndex(TOBUY_COLUMN_NAME)));
-//            res.moveToNext();
         }
 
         return array_list;
