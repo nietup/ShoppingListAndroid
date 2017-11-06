@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "sl.db";
     public static final int DATABASE_VERSION = 1;
     public static final String TOBUY_TABLE_NAME = "to_buy";
-    public static final String TOBUY_COLUMN_ID = "id";
+    public static final String TOBUY_COLUMN_ID = "_id";
     public static final String TOBUY_COLUMN_NAME = "name";
     public static final String TOBUY_QUANTITY = "quantity";
     public static final String TOBUY_BOUGHT = "boungth";
