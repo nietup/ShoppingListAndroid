@@ -76,4 +76,8 @@ public class ListActivity extends Activity {
     public void dropData(View v) {
         dbHelper.deleteAllItems();
     }
+
+    public void startAddItemActivity(View view) {
+        startActivity(new Intent(this, AddItemActivity.class));
+    }
 }

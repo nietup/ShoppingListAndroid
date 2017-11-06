@@ -17,7 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".PreferencesActivity" />
-        <activity android:name=".ListActivity"></activity>
+        <activity android:name=".ListActivity" />
+        <activity android:name=".SLRActivity" />
+        <activity android:name=".AddItemActivity"></activity>
     </application>
 
 </manifest>
