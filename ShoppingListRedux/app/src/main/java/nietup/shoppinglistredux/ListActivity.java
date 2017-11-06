@@ -86,4 +86,8 @@ public class ListActivity extends Activity {
     public void itemClicked(View v) {
         Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
     }
+
+    public void openMainMenu(View v) {
+        startActivity(new Intent(this, MainActivity.class));
+    }
 }

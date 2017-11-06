@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ItemDetailsActivity extends Activity {
+public class ItemDetailsActivity extends SLRActivity {
 
     private DBHelper dbHelper;
     private TextView TW_itemName;
