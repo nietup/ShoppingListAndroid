@@ -14,6 +14,7 @@ public class PreferencesActivity extends Activity {
 
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
+    private DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,8 @@ public class PreferencesActivity extends Activity {
         setContentView(R.layout.activity_preferences);
 
         setupDarkModeSwitch();
+
+        dbHelper = new DBHelper(this);
     }
 
     private void updateActivityTheme() {
@@ -64,5 +67,9 @@ public class PreferencesActivity extends Activity {
 
     public void openMainMenu(View v) {
         startActivity(new Intent(this, MainActivity.class));
+    }
+
+    public void upgradeDatabase (View v) {
+        dbHelper.onUpgrade(dbHelper.getWritableDatabase(), dbHelper.DATABASE_VERSION, dbHelper.DATABASE_VERSION+1);
     }
 }

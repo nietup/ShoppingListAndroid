@@ -64,7 +64,7 @@ public class ListActivity extends Activity {
 //        });
     }
 
-    public void insertTestData(View v) {
+    public void insertTestData() {
         dbHelper.insertItem("ddd", 12, false, "warzywo", "12-12-2017", 99);
         dbHelper.insertItem("dcds", 4, false,"warzywo", "12-12-2017", 99);
         dbHelper.insertItem("ew", 90, false,"warzywo", "12-12-2017", 99);

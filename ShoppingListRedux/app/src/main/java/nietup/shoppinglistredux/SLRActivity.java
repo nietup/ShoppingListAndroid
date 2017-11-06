@@ -11,6 +11,7 @@ import android.os.Bundle;
 public class SLRActivity extends Activity {
 
     protected SharedPreferences settings;
+//    protected DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +19,8 @@ public class SLRActivity extends Activity {
         updateActivityTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slr);
+
+//        dbHelper = new DBHelper(getApplicationContext());
     }
 
     protected void updateActivityTheme() {
