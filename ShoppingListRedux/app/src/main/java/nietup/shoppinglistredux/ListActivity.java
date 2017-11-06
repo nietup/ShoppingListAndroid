@@ -45,23 +45,25 @@ public class ListActivity extends Activity {
 
     private void showItems() {
         Cursor items = dbHelper.getAllItems();
+
         TobuyCursorAdapter adapter = new TobuyCursorAdapter(getApplicationContext(), items);
         itemsList.setAdapter(adapter);
 
-//        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
-//        itemsList.setAdapter(arrayAdapter);
-//        itemsList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-//            @Override
-//            public void onItemClick(AdapterView arg0, View arg1, int arg2, long arg3) {
-//                Bundle dataBundle = new Bundle();
-//                dataBundle.putInt("id", idToSearch);
-//
-//                Intent intent = new Intent(getApplicationContext(), ItemDetailsActivity.class);
-//
-//                intent.putExtras(dataBundle);
-//                startActivity(intent);
-//            }
-//        });
+        itemsList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView arg0, View arg1, int pos, long arg3) {
+                Cursor c = (Cursor) itemsList.getItemAtPosition(pos);
+                int idToSearch = c.getInt(c.getColumnIndex(DBHelper.TOBUY_COLUMN_ID));
+                
+                Bundle dataBundle = new Bundle();
+                dataBundle.putInt("id", idToSearch);
+
+                Intent intent = new Intent(getApplicationContext(), ItemDetailsActivity.class);
+
+                intent.putExtras(dataBundle);
+                startActivity(intent);
+            }
+        });
     }
 
     public void insertTestData() {

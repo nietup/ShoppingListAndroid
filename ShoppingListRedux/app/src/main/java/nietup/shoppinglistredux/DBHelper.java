@@ -64,7 +64,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor getData(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        return db.rawQuery("select * from " + TOBUY_TABLE_NAME + " where id=" + id, null);
+        return db.rawQuery("select * from " + TOBUY_TABLE_NAME + " where " + TOBUY_COLUMN_ID + " = " + id, null);
     }
 
     public int numberOfRows(){
@@ -84,7 +84,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public Integer deleteItem(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        return db.delete(TOBUY_TABLE_NAME, "id = ? ", new String[] { Integer.toString(id) });
+        return db.delete(TOBUY_TABLE_NAME, TOBUY_COLUMN_ID + " = ? ", new String[] { Integer.toString(id) });
     }
 
 //    public ArrayList<String> getAllItems() {
