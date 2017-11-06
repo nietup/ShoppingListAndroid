@@ -11,4 +11,6 @@
     <string name="item_quantity_text">Quantity</string>
     <string name="upgrade_db_text">Upgrade Database</string>
     <string name="delete_item_text">Delete Item</string>
+    <string name="modify_item">Modify Item</string>
+    <string name="item_bought_text">Is bought?</string>
 </resources>

@@ -73,13 +73,18 @@ public class DBHelper extends SQLiteOpenHelper {
         return (int) DatabaseUtils.queryNumEntries(db, TOBUY_TABLE_NAME);
     }
 
-//    public boolean updateItem(int id, String name, String category, String deadline, int price) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put("name", name);
-//        db.update("contacts", contentValues, "id = ? ", new String[] { Integer.toString(id) } );
-//        return true;
-//    }
+    public boolean updateItem(int id, String name, int quantity, boolean bought, String category, String deadline, int price) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(TOBUY_COLUMN_NAME, name);
+        cv.put(TOBUY_QUANTITY, quantity);
+        cv.put(TOBUY_BOUGHT, bought);
+        cv.put(TOBUY_COLUMN_CATEGORY, category);
+        cv.put(TOBUY_COLUMN_DEADLINE, deadline);
+        cv.put(TOBUY_COLUMN_PRICE, price);
+        db.update(TOBUY_TABLE_NAME, cv, TOBUY_COLUMN_ID + " = ? ", new String[] { Integer.toString(id) } );
+        return true;
+    }
 
     public Integer deleteItem(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
