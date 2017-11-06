@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,25 +44,23 @@ public class ListActivity extends Activity {
     private void showItems() {
         ArrayList<String> items = dbHelper.getAllItems();
 
-        ArrayAdapter arrayAdapter =
-                new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
 
         itemsList.setAdapter(arrayAdapter);
-//        itemsList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-//            @Override
-//            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-//                // TODO Auto-generated method stub
-//                int id_To_Search = arg2 + 1;
-//
-//                Bundle dataBundle = new Bundle();
-//                dataBundle.putInt("id", id_To_Search);
-//
-//                Intent intent = new Intent(getApplicationContext(), DisplayContact.class);
-//
-//                intent.putExtras(dataBundle);
-//                startActivity(intent);
-//            }
-//        });
+        itemsList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView arg0, View arg1, int arg2, long arg3) {
+                int idToSearch = arg2 + 1;
+
+                Bundle dataBundle = new Bundle();
+                dataBundle.putInt("id", idToSearch);
+
+                Intent intent = new Intent(getApplicationContext(), ItemDetailsActivity.class);
+
+                intent.putExtras(dataBundle);
+                startActivity(intent);
+            }
+        });
     }
 
     public void insertTestData() {
@@ -79,5 +78,9 @@ public class ListActivity extends Activity {
 
     public void startAddItemActivity(View view) {
         startActivity(new Intent(this, AddItemActivity.class));
+    }
+
+    public void itemClicked(View v) {
+        Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
     }
 }

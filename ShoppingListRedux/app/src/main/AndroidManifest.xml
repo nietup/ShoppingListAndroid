@@ -19,7 +19,8 @@
         <activity android:name=".PreferencesActivity" />
         <activity android:name=".ListActivity" />
         <activity android:name=".SLRActivity" />
-        <activity android:name=".AddItemActivity"></activity>
+        <activity android:name=".AddItemActivity" />
+        <activity android:name=".ItemDetailsActivity"></activity>
     </application>
 
 </manifest>
