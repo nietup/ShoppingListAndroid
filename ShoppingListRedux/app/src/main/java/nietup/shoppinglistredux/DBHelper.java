@@ -87,17 +87,40 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.delete(TOBUY_TABLE_NAME, "id = ? ", new String[] { Integer.toString(id) });
     }
 
-    public ArrayList<String> getAllItems() {
-        ArrayList<String> array_list = new ArrayList<String>();
-        SQLiteDatabase db = this.getReadableDatabase();
+//    public ArrayList<String> getAllItems() {
+//        ArrayList<String> array_list = new ArrayList<String>();
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+//        Cursor res =  db.rawQuery("select * from " + TOBUY_TABLE_NAME, null);
+//
+//        while (res.moveToNext()) {
+//            array_list.add(res.getString(res.getColumnIndex(TOBUY_COLUMN_NAME)));
+//        }
+//
+//        return array_list;
+//    }
+//
+//    public ArrayList<DBRecord> getAllItems() {
+//        ArrayList<DBRecord> res = new ArrayList<DBRecord>();
+//        SQLiteDatabase db = getReadableDatabase();
+//
+//        Cursor all = db.rawQuery("select * from " + TOBUY_TABLE_NAME, null);
+//
+//        while (all.moveToNext()) {
+//            String name = all.getString(all.getColumnIndex(TOBUY_COLUMN_NAME));
+//            int quantity = all.getInt(all.getColumnIndex(TOBUY_QUANTITY));
+//            boolean bougth = all.getInt(all.getColumnIndex(TOBUY_BOUGHT)) > 0;
+//            String category = all.getString(all.getColumnIndex(TOBUY_COLUMN_CATEGORY));
+//            String deadline = all.getString(all.getColumnIndex(TOBUY_COLUMN_DEADLINE));
+//            int price = all.getInt(all.getColumnIndex(TOBUY_COLUMN_PRICE));
+//            res.add(new DBRecord(name, quantity, bougth, category, deadline, price));
+//        }
+//
+//        return res;
+//    }
 
-        Cursor res =  db.rawQuery("select * from " + TOBUY_TABLE_NAME, null);
-
-        while (res.moveToNext()) {
-            array_list.add(res.getString(res.getColumnIndex(TOBUY_COLUMN_NAME)));
-        }
-
-        return array_list;
+    public Cursor getAllItems() {
+        return getReadableDatabase().rawQuery("select * from " + TOBUY_TABLE_NAME, null);
     }
 
     public void deleteAllItems() {

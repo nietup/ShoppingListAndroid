@@ -3,6 +3,8 @@ package nietup.shoppinglistredux;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,25 +44,24 @@ public class ListActivity extends Activity {
     }
 
     private void showItems() {
-        ArrayList<String> items = dbHelper.getAllItems();
+        Cursor items = dbHelper.getAllItems();
+        TobuyCursorAdapter adapter = new TobuyCursorAdapter(getApplicationContext(), items);
+        itemsList.setAdapter(adapter);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
-
-        itemsList.setAdapter(arrayAdapter);
-        itemsList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView arg0, View arg1, int arg2, long arg3) {
-                int idToSearch = arg2 + 1;
-
-                Bundle dataBundle = new Bundle();
-                dataBundle.putInt("id", idToSearch);
-
-                Intent intent = new Intent(getApplicationContext(), ItemDetailsActivity.class);
-
-                intent.putExtras(dataBundle);
-                startActivity(intent);
-            }
-        });
+//        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
+//        itemsList.setAdapter(arrayAdapter);
+//        itemsList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+//            @Override
+//            public void onItemClick(AdapterView arg0, View arg1, int arg2, long arg3) {
+//                Bundle dataBundle = new Bundle();
+//                dataBundle.putInt("id", idToSearch);
+//
+//                Intent intent = new Intent(getApplicationContext(), ItemDetailsActivity.class);
+//
+//                intent.putExtras(dataBundle);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     public void insertTestData() {
