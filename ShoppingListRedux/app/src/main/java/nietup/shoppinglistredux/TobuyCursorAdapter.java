@@ -26,9 +26,14 @@ public class TobuyCursorAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         TextView tvItemName = (TextView) view.findViewById(R.id.tv_item_name);
         TextView tvItemQuantity = (TextView) view.findViewById(R.id.tv_item_quantity);
+        TextView tvPrice = (TextView) view.findViewById(R.id.it_tv_price);
+
         String itemName = cursor.getString(cursor.getColumnIndex(DBHelper.TOBUY_COLUMN_NAME));
         int quantity = cursor.getInt(cursor.getColumnIndex(DBHelper.TOBUY_QUANTITY));
+        int price = cursor.getInt(cursor.getColumnIndex(DBHelper.TOBUY_COLUMN_PRICE));
+
         tvItemName.setText(itemName);
         tvItemQuantity.setText(String.valueOf(quantity));
+        tvPrice.setText("$" + String.valueOf(price));
     }
 }
