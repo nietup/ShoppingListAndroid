@@ -6,4 +6,5 @@
     <string name="open_list_button_text">Show list</string>
     <string name="populate_base_text">Populate Database</string>
     <string name="drop_base">Drop Data</string>
+    <string name="add_item_text">Add Item</string>
 </resources>

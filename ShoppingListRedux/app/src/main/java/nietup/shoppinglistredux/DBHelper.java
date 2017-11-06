@@ -19,6 +19,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String TOBUY_TABLE_NAME = "to_buy";
     public static final String TOBUY_COLUMN_ID = "id";
     public static final String TOBUY_COLUMN_NAME = "name";
+    public static final String TOBUY_QUANTITY = "quantity";
+    public static final String TOBUY_BOUGHT = "boungth";
     public static final String TOBUY_COLUMN_CATEGORY = "category";
     public static final String TOBUY_COLUMN_DEADLINE = "deadline";
     public static final String TOBUY_COLUMN_PRICE = "price";
@@ -33,6 +35,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "create table " + TOBUY_TABLE_NAME + "(" +
                         TOBUY_COLUMN_ID + " integer primary key, " +
                         TOBUY_COLUMN_NAME + " text, " +
+                        TOBUY_QUANTITY + " integer, " +
+                        TOBUY_BOUGHT + " boolean, " +
                         TOBUY_COLUMN_CATEGORY + " text, " +
                         TOBUY_COLUMN_DEADLINE + " date, " +
                         TOBUY_COLUMN_PRICE + " integer)"
@@ -45,10 +49,12 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertItem(String name, String category, String deadline, int price) {
+    public void insertItem(String name, int quantity, boolean bought, String category, String deadline, int price) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(TOBUY_COLUMN_NAME, name);
+        cv.put(TOBUY_QUANTITY, quantity);
+        cv.put(TOBUY_BOUGHT, bought);
         cv.put(TOBUY_COLUMN_CATEGORY, category);
         cv.put(TOBUY_COLUMN_DEADLINE, deadline);
         cv.put(TOBUY_COLUMN_PRICE, price);

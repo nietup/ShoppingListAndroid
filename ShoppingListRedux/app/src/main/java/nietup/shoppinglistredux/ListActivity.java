@@ -65,10 +65,10 @@ public class ListActivity extends Activity {
     }
 
     public void insertTestData(View v) {
-        dbHelper.insertItem("ddd", "warzywo", "12-12-2017", 99);
-        dbHelper.insertItem("dcds", "warzywo", "12-12-2017", 99);
-        dbHelper.insertItem("ew", "warzywo", "12-12-2017", 99);
-        dbHelper.insertItem("cai", "warzywo", "12-12-2017", 99);
+        dbHelper.insertItem("ddd", 12, false, "warzywo", "12-12-2017", 99);
+        dbHelper.insertItem("dcds", 4, false,"warzywo", "12-12-2017", 99);
+        dbHelper.insertItem("ew", 90, false,"warzywo", "12-12-2017", 99);
+        dbHelper.insertItem("cai", 3, true, "warzywo", "12-12-2017", 99);
 
         Toast.makeText(getApplicationContext(), "insert done", Toast.LENGTH_SHORT).show();
     }
