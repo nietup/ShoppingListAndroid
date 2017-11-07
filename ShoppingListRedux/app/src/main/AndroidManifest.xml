@@ -21,6 +21,12 @@
         <activity android:name=".SLRActivity" />
         <activity android:name=".AddItemActivity" />
         <activity android:name=".ItemDetailsActivity"></activity>
+
+        <provider
+            android:authorities="nietup.shoppinglistredux"
+            android:name=".ListProvider"
+            android:exported="false"
+            android:syncable="true" />
     </application>
 
 </manifest>
