@@ -128,6 +128,10 @@ public class DBHelper extends SQLiteOpenHelper {
         return getReadableDatabase().rawQuery("select * from " + TOBUY_TABLE_NAME, null);
     }
 
+    public Cursor getUnboughtItems() {
+        return getReadableDatabase().rawQuery("select * from " + TOBUY_TABLE_NAME + " where " + TOBUY_BOUGHT + " = 0", null);
+    }
+
     public void deleteAllItems() {
         SQLiteDatabase db = getWritableDatabase();
 

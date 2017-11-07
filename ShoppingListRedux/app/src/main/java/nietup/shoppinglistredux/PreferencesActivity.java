@@ -27,6 +27,7 @@ public class PreferencesActivity extends Activity {
         setContentView(R.layout.activity_preferences);
 
         setupDarkModeSwitch();
+        setupShowAllSwitch();
 
         dbHelper = new DBHelper(this);
     }
@@ -45,10 +46,20 @@ public class PreferencesActivity extends Activity {
 
         if (settings.getBoolean("dark_mode", false)) {
             sw.setChecked(true);
-            sw.setTextColor(Color.WHITE);
         }
         else {
             sw.setChecked(false);
+        }
+    }
+
+    private void setupShowAllSwitch() {
+        Switch sw = (Switch) findViewById(R.id.ap_s_show_all);
+
+        if (settings.getBoolean("show_all", true)) {
+            sw.setChecked(false);
+        }
+        else {
+            sw.setChecked(true);
         }
     }
 
@@ -61,6 +72,19 @@ public class PreferencesActivity extends Activity {
         }
         else {
             editor.putBoolean("dark_mode", true);
+            editor.commit();
+        }
+    }
+
+    public void setShowAll(View v) {
+        Boolean showAll = settings.getBoolean("show_all", true);
+
+        if (showAll) {
+            editor.putBoolean("show_all", false);
+            editor.commit();
+        }
+        else {
+            editor.putBoolean("show_all", true);
             editor.commit();
         }
     }

@@ -44,7 +44,14 @@ public class ListActivity extends Activity {
     }
 
     private void showItems() {
-        Cursor items = dbHelper.getAllItems();
+        Cursor items;
+        if (settings.getBoolean("show_all", true)) {
+            items = dbHelper.getAllItems();
+        }
+        else {
+            items = dbHelper.getUnboughtItems();
+        }
+
 
         TobuyCursorAdapter adapter = new TobuyCursorAdapter(getApplicationContext(), items);
         itemsList.setAdapter(adapter);
