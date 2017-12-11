@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ShoppingListRedux.iml" filepath="$PROJECT_DIR$/ShoppingListRedux.iml" />
+      <module fileurl="file://C:\Users\nietup\Code\ShoppingListRedux\ShoppingListRedux\ShoppingListRedux.iml" filepath="C:\Users\nietup\Code\ShoppingListRedux\ShoppingListRedux\ShoppingListRedux.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\nietup\Code\ShoppingListRedux\ShoppingListRedux\app\app.iml" filepath="C:\Users\nietup\Code\ShoppingListRedux\ShoppingListRedux\app\app.iml" />
     </modules>
   </component>
 </project>

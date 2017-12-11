@@ -1,0 +1,114 @@
+USE FIREBASE FIRESTORE TO STORE STORAGE
+
+1. Tools -> Firebase -> Storage	-> Upload and download a file with Cloud Storage -> Connect your app to Firebase
+
+3. Project -> Gradle Scripts -> build.gradle (Module: App) ->
+dependencies {
+    ...
+    //noinspection GradleCompatible
+    compile "com.android.support:support-core-utils:27.0.2"
+    compile 'com.google.firebase:firebase-core:11.6.2'
+    compile 'com.google.firebase:firebase-firestore:11.6.2'
+}
+
+4. Project -> app -> res -> layout -> ....xml -> EditText (text do zapisania) + Button (save button)
+
+x. -||- -> Button android:onClick="saveText"
+
+5. Project -> app -> java -> com.... -> ...Activity ->
+...
+public static final String QUOTE_KEY = "quote";
+public static final String QUOTE_TAG = "Saving quote";
+private DocumentReference mDocRef = FirebaseFirestore.getInstance().document("sampleData/quotes");
+...
+public void saveText(View view) {
+        EditText quoteToSave = (EditText) findViewById(R.id.editText_input_text);
+        String quote = quoteToSave.getText().toString();
+
+        if (quote.isEmpty()) {
+            return;
+        }
+
+        Map<String, Object> dataToSave = new HashMap<String, Object>();
+        dataToSave.put(QUOTE_KEY, quote);
+        mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(QUOTE_TAG, "Document has been saved!");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(QUOTE_TAG, "Document has NOT been saved!", e);
+            }
+        });
+    }
+
+x. https://firebase.google.com/ -> GO TO CONSOLE -> whatever project -> DEVELOP -> Database -> Cloud Firestore -> Test Setup (wszystko public)
+
+/*
+x. Project -> app -> res -> layout -> ....xml -> Button (fetch button) + TextView
+
+x. -||- -> Button android:onClick="fetchData"
+
+x. Project -> app -> java -> com.... -> ...Activity ->
+...
+TextView twQuote;
+...
+@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        ...
+        twQuote = (TextView) findViewById(R.id.textView_quotes);
+    }
+...
+public void fetchData(View view) {
+        mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    String quote = documentSnapshot.getString(QUOTE_KEY);
+
+                    twQuote.setText(quote);
+                }
+            }
+        });
+    }
+*/
+
+x. Project -> app -> res -> layout -> ....xml -> TextView
+
+x. Project -> app -> java -> com.... -> ...Activity ->
+...
+TextView twQuote;
+private ListenerRegistration mSnapshotListener;
+...
+	@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        ...
+        twQuote = (TextView) findViewById(R.id.textView_quotes);
+    }
+...
+   	@Override
+    protected void onStop() {
+        super.onStop();
+
+        mSnapshotListener.remove();
+    }
+...
+	@Override
+    protected void onStart() {
+        super.onStart();
+
+        mSnapshotListener = mDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
+                if (documentSnapshot.exists()) {
+                    String quote = documentSnapshot.getString(QUOTE_KEY);
+
+                    twQuote.setText(quote);
+                } else if (e != null) {
+                    Log.w(QUOTE_TAG, "Got an exception!", e);
+                }
+            }
+        });
+    }
