@@ -10,11 +10,14 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,6 +34,7 @@ public class ListActivity extends Activity {
     private SharedPreferences settings;
     private DBHelper dbHelper;
     private ListView itemsList;
+    private final List<String> indices = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +100,11 @@ public class ListActivity extends Activity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             items.clear();
+                            indices.clear();
 
                             for (DocumentSnapshot document : task.getResult()) {
+                                indices.add(document.getId());
+
                                 Map<String, Object> data = document.getData();
                                 String row = (String) data.get("name") + "     x " + data.get("quantity") + "     $" + data.get("price");
                                 items.add(row);
@@ -111,6 +118,19 @@ public class ListActivity extends Activity {
                         }
                     }
                 });
+
+        itemsList.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView adapterView, View view, int i, long l) {
+                String doc = indices.get(i);
+                String row = itemsList.getItemAtPosition(i).toString();
+
+                Intent intent = new Intent(getApplicationContext(), DeleteItemActivity.class);
+                intent.putExtra("ROW", row);
+                intent.putExtra("DOCUMENT", doc);
+                startActivity(intent);
+            }
+        });
     }
 
     public void insertTestData() {

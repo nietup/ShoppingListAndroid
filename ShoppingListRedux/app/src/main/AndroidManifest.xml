@@ -20,13 +20,15 @@
         <activity android:name=".ListActivity" />
         <activity android:name=".SLRActivity" />
         <activity android:name=".AddItemActivity" />
-        <activity android:name=".ItemDetailsActivity"></activity>
+        <activity android:name=".ItemDetailsActivity" />
 
         <provider
-            android:authorities="nietup.shoppinglistredux"
             android:name=".ListProvider"
+            android:authorities="nietup.shoppinglistredux"
             android:exported="false"
             android:syncable="true" />
+
+        <activity android:name=".DeleteItemActivity"></activity>
     </application>
 
 </manifest>

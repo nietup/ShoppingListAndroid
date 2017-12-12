@@ -15,4 +15,5 @@
     <string name="item_bought_text">Is bought?</string>
     <string name="item_price_text">Price</string>
     <string name="show_all_switch_text">Hide bought items</string>
+    <string name="remove_item">Remove Item</string>
 </resources>
